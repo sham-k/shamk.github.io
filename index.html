@@ -1,0 +1,887 @@
+    /* Base project header styles */
+    .project-header {
+      color: white;
+      padding: 18px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+    
+    /* Base project card hover */
+    .project-card:hover {
+      transform: translateY(-20px) scale(1.03);
+    }<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shamar Knibbs - Frontend Engineer</title>
+  <style>
+    * {
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #94a3b8 75%, #64748b 100%);
+      color: #333;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    /* Fade in animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* NON-STICKY NAVIGATION */
+    .navigation-section {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      color: #1e293b;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    }
+    
+    .navigation-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      margin: 10px 0 20px 0;
+      color: #475569;
+      font-weight: 500;
+    }
+    
+    nav {
+      margin-top: 20px;
+    }
+    nav a {
+      color: #1e293b;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(30, 41, 59, 0.1);
+    }
+    nav a:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      border-color: transparent;
+    }
+    
+    .section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    
+    .section h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-size: 2.5rem;
+      color: #1e293b;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    
+    .section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+    
+    /* About Section */
+    .about-content {
+      background: rgba(255, 255, 255, 0.3);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      transition: all 0.4s ease;
+    }
+    
+    .about-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    .about-content p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      color: #1e293b;
+    }
+    
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .stat {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .stat:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .skill {
+      background: rgba(255, 255, 255, 0.4);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    
+    .skill:hover {
+      transform: translateY(-15px) rotateY(10deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      background: rgba(255, 255, 255, 0.6);
+    }
+    
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .skill:hover .skill-icon {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    .skill h3 {
+      margin: 0;
+      color: #1e293b;
+      font-size: 1rem;
+    }
+    
+    /* Featured Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .project-card {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .project-card:hover {
+      transform: translateY(-20px) scale(1.03);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+    
+    .project-header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+    
+    .project-card:hover .project-header {
+      background: linear-gradient(135deg, #764ba2, #667eea);
+    }
+    
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover .project-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+    
+    .project-card .content {
+      padding: 30px;
+    }
+    
+    .project-card h3 {
+      margin: 0 0 15px;
+      font-size: 1.5rem;
+      color: #1e293b;
+      text-align: center;
+    }
+    
+    .project-card p {
+      margin: 0 0 20px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      justify-content: center;
+    }
+    
+    .tech-tag {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    .tech-tag:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+    
+    .project-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .project-link {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .project-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.6s ease;
+    }
+    
+    .project-link:hover::before {
+      left: 100%;
+    }
+    
+    .project-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+    }
+    
+    .impact-badge {
+      background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+      color: #2d3436;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+    
+    .impact-badge:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Contact */
+    footer {
+      background: rgba(34, 34, 34, 0.95);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      text-align: center;
+      padding: 60px 20px 40px;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    
+    footer h2 {
+      margin-bottom: 15px;
+      color: #fff;
+      font-size: 2.2rem;
+      position: relative;
+    }
+    
+    .contact-subtitle {
+      color: #bbb;
+      font-size: 1rem;
+      margin-bottom: 60px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      perspective: 1000px;
+    }
+    
+    .contact-item {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      padding: 30px 25px;
+      border-radius: 18px;
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+    
+    .contact-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.8s ease;
+    }
+    
+    .contact-item:hover::before {
+      left: 100%;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-12px) rotateX(8deg) rotateY(4deg);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.6);
+    }
+    
+    .contact-icon {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    
+    .contact-item:hover .contact-icon {
+      transform: scale(1.15) rotate(360deg);
+      box-shadow: 0 0 25px rgba(102, 126, 234, 0.5);
+    }
+    
+    .contact-item h3 {
+      margin: 0 0 15px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    
+    .contact-item a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 15px;
+      background: rgba(102, 126, 234, 0.1);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+    
+    .contact-item a:hover {
+      color: #fff;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+    
+    .footer-bottom {
+      margin-top: 40px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(102, 126, 234, 0.2);
+      position: relative;
+    }
+    
+    .footer-bottom::before {
+      content: '✨';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(34, 34, 34, 0.95);
+      padding: 0 15px;
+      font-size: 1rem;
+    }
+    
+    .footer-bottom p {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin: 0;
+    }
+    
+    /* Scroll to top button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      font-size: 1.2rem;
+    }
+    
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .scroll-top:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .navigation-section h1 {
+        font-size: 2rem;
+      }
+      nav a {
+        display: block;
+        margin: 5px 0;
+      }
+      .section {
+        padding: 50px 15px;
+      }
+      .section h2 {
+        font-size: 2rem;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      .about-content {
+        padding: 25px;
+      }
+      .skill:hover {
+        transform: translateY(-10px);
+      }
+      .contact-info {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NON-STICKY NAVIGATION -->
+  <div class="navigation-section">
+    <h1 class="fade-in">Shamar Knibbs</h1>
+    <p class="subtitle">Frontend Engineer</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <section id="about" class="section fade-in">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <p>
+        I'm a highly dynamic and driven Frontend Engineer passionate about elevating user experiences through 
+        intuitive, responsive, and visually appealing design. I possess a keen talent for translating complex 
+        user and business needs into actionable design and development plans.
+      </p>
+      <p>
+        My journey has taken me through prestigious companies like Optum and The Wall Street Journal, where I've 
+        consistently delivered innovative solutions that drive user engagement and business success.
+      </p>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-number" data-target="1000">1000+</div>
+          <div class="stat-label">Users Impacted</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="15">15+</div>
+          <div class="stat-label">Apps Modernized</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="300">300+</div>
+          <div class="stat-label">Websites Enhanced</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number" data-target="50">50%</div>
+          <div class="stat-label">Deployment Time Reduced</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section fade-in">
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">
+        <div class="skill-icon">⚛️</div>
+        <h3>React</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">📱</div>
+        <h3>React Native</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">🟦</div>
+        <h3>TypeScript</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">🟢</div>
+        <h3>Node.js</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">⚡</div>
+        <h3>Next.js</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">🅰️</div>
+        <h3>Angular</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">☁️</div>
+        <h3>AWS</h3>
+      </div>
+      <div class="skill">
+        <div class="skill-icon">🐳</div>
+        <h3>Kubernetes</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section fade-in">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+      
+      <!-- Virtual-Landing Project -->
+      <div class="project-card" style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(75, 0, 130, 0.15)) !important; border: 2px solid rgba(138, 43, 226, 0.4) !important;">
+        <div class="project-header" style="background: linear-gradient(135deg, #8A2BE2, #4B0082) !important;">
+          <div class="project-icon" style="text-shadow: 0 0 15px rgba(138, 43, 226, 0.8);">🥽</div>
+          <h3>Virtual-Landing</h3>
+        </div>
+        <div class="content">
+          <p>Explore this dynamic landing page that highlights an innovative VR platform. I crafted the interface using React and Tailwind to ensure a seamless and engaging user experience.</p>
+          <div class="tech-tags">
+            <span class="tech-tag" style="background: linear-gradient(135deg, #8A2BE2, #4B0082) !important;">React</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #8A2BE2, #4B0082) !important;">Tailwind CSS</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #8A2BE2, #4B0082) !important;">VR Platform</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/sham-k/Virtual-Landing" target="_blank" class="project-link" style="background: linear-gradient(135deg, #8A2BE2, #4B0082) !important;">
+              <span>View Code</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brainwave Project -->
+      <div class="project-card" style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.2), rgba(255, 69, 0, 0.15)) !important; border: 2px solid rgba(255, 20, 147, 0.4) !important;">
+        <div class="project-header" style="background: linear-gradient(135deg, #FF1493, #FF4500) !important;">
+          <div class="project-icon" style="animation: brainPulse 2s ease-in-out infinite;">🧠</div>
+          <h3>Brainwave</h3>
+        </div>
+        <div class="content">
+          <p>A cutting-edge website showcasing contemporary UI/UX design principles with sleek aesthetics, smooth animations, and exceptional user experience.</p>
+          <div class="tech-tags">
+            <span class="tech-tag" style="background: linear-gradient(135deg, #FF1493, #FF4500) !important;">React.js</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #FF1493, #FF4500) !important;">Tailwind CSS</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #FF1493, #FF4500) !important;">UI/UX</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/sham-k/Brainwave" target="_blank" class="project-link" style="background: linear-gradient(135deg, #FF1493, #FF4500) !important;">
+              <span>View Code</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- UHC Mobile Platform -->
+      <div class="project-card" style="background: linear-gradient(135deg, rgba(0, 206, 209, 0.2), rgba(32, 178, 170, 0.15)) !important; border: 2px solid rgba(0, 206, 209, 0.4) !important;">
+        <div class="project-header" style="background: linear-gradient(135deg, #00CED1, #20B2AA) !important; position: relative;">
+          <div class="project-icon">📱</div>
+          <h3>UHC Mobile Platform</h3>
+          <div style="position: absolute; top: 10px; right: 15px; width: 8px; height: 8px; background: #00FF7F; border-radius: 50%; animation: statusBlink 2s infinite; box-shadow: 0 0 10px #00FF7F;"></div>
+        </div>
+        <div class="content">
+          <p>Led development of mobile features serving 1,000+ users with React Native, including Google Wallet integration and analytics implementation.</p>
+          <div class="tech-tags">
+            <span class="tech-tag" style="background: linear-gradient(135deg, #00CED1, #20B2AA) !important;">React Native</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #00CED1, #20B2AA) !important;">Mobile</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #00CED1, #20B2AA) !important;">Analytics</span>
+          </div>
+          <div class="impact-badge">1,000+ Users Impacted</div>
+        </div>
+      </div>
+
+      <!-- WSJ Design System -->
+      <div class="project-card" style="background: linear-gradient(135deg, rgba(25, 25, 112, 0.2), rgba(184, 134, 11, 0.15)) !important; border: 2px solid rgba(25, 25, 112, 0.4) !important;">
+        <div class="project-header" style="background: linear-gradient(135deg, #191970, #B8860B) !important; position: relative;">
+          <div class="project-icon" style="position: relative;">
+            📰
+            <div style="position: absolute; top: -2px; right: -2px; width: 6px; height: 6px; background: #B8860B; border-radius: 50%; box-shadow: 0 0 8px #B8860B;"></div>
+          </div>
+          <h3>WSJ Design System</h3>
+          <div style="position: absolute; bottom: 5px; left: 15px; right: 15px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);"></div>
+        </div>
+        <div class="content">
+          <p>Collaborative development of internal newsroom design system serving 50+ users organization-wide, built with React and Next.js.</p>
+          <div class="tech-tags">
+            <span class="tech-tag" style="background: linear-gradient(135deg, #191970, #B8860B) !important;">React</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #191970, #B8860B) !important;">Next.js</span>
+            <span class="tech-tag" style="background: linear-gradient(135deg, #191970, #B8860B) !important;">Design System</span>
+          </div>
+          <div class="impact-badge">300+ Websites Enhanced</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer id="contact" class="fade-in">
+    <h2>Let's Connect</h2>
+    <p class="contact-subtitle">
+      Ready to create something amazing together? I'd love to hear about your next project and explore how we can bring your ideas to life.
+    </p>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <h3>Email Me</h3>
+        <a href="mailto:shamarknibbs@gmail.com">shamarknibbs@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <h3>Call Me</h3>
+        <a href="tel:+19175043532">(917) 504-3532</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">💼</div>
+        <h3>LinkedIn</h3>
+        <a href="https://linkedin.com/in/shamar-knibbs" target="_blank">Connect with me</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⚡</div>
+        <h3>GitHub</h3>
+        <a href="https://github.com/kingsham" target="_blank">View my code</a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 Shamar Knibbs - Frontend Engineer</p>
+    </div>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+  <script>
+    // Clean up any stray CSS text that might appear before the navigation
+    document.addEventListener('DOMContentLoaded', () => {
+      const navigation = document.querySelector('.navigation-section');
+      if (navigation) {
+        // Remove any text nodes that contain CSS code before the navigation
+        let current = navigation.previousSibling;
+        while (current) {
+          const prev = current.previousSibling;
+          if (current.nodeType === Node.TEXT_NODE && current.textContent.includes('project-header')) {
+            current.remove();
+          }
+          current = prev;
+        }
+      }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Scroll to top button visibility
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.querySelector('.scroll-top');
+      
+      if (window.scrollY > 100) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    });
+
+    // Scroll to top function
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Fade in animation on scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Trigger initial fade-in for navigation
+    setTimeout(() => {
+      document.querySelector('.fade-in').classList.add('visible');
+    }, 100);
+
+    console.log('🚀 Clean Portfolio - Single Page Version!');
+  </script>
+</body>
+</html>
